@@ -55,13 +55,13 @@ const infoDestinasi = [
 
 const Featured = () => {
   return (
-    <section className="bg-gray-50 py-16 px-6">
+    <section className="bg-white py-16 px-8">
       {/* Card Info Aplikasi */}
       <div className="flex flex-col md:flex-row justify-center gap-6 mb-12">
         {infoCard.map((info) => (
           <div
             key={info.id}
-            className="bg-white p-5 rounded-xl shadow-md flex items-start gap-4 w-full md:max-w-sm"
+            className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4 w-full md:max-w-sm"
           >
             <div className="text-teal-600 text-2xl mt-1">
               <FaRegCheckCircle />
