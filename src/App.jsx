@@ -3,7 +3,7 @@ import Featured from './sections/Featured'
 import Footer from './sections/Footer';
 import HeroSection from './sections/Hero'
 import Step from './sections/Step';
-import Testing from './sections/Testing';
+import Testimoni from './sections/Testimoni';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <HeroSection />
       <Featured />
       <Step />
-      <Testing />
+      <Testimoni />
       <Footer />
     </div>
   );
