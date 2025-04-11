@@ -1,10 +1,14 @@
-import './App.css'
-import HeroSection from './components/Hero'
+import './index.css'
+import Featured from './sections/Featured'
+import HeroSection from './sections/Hero'
 
 function App() {
   return (
-    <HeroSection />
-  )
+    <div>
+      <HeroSection />
+      <Featured />
+    </div>
+  );
 }
 
 export default App
