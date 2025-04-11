@@ -40,7 +40,7 @@ const Step = () => {
           {/* Kolom A: Rating & AI */}
           <div className="flex flex-col gap-6 w-full md:w-1/2">
             {/* Kartu Rating */}
-            <div className="bg-white shadow-lg rounded-xl p-4">
+            <div className="bg-white shadow-lg rounded-xl p-4 ml-12">
               <p className="text-3xl font-bold text-sky-800 mb-2 text-center">
                 4.9
               </p>
@@ -62,13 +62,14 @@ const Step = () => {
             </div>
 
             {/* Kartu AI */}
-            <div className="bg-white shadow-lg rounded-xl p-4">
+            <div className="bg-white shadow-lg rounded-lg px-6 py-4 w-full h-32 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-teal-600 font-semibold">
                 <WiStars className="text-2xl text-teal-500" />
                 <span>Rekomendasi AI</span>
               </div>
               <p className="text-sm text-gray-600 mt-2 leading-snug">
-                Destinasi ini rekomended loh karena bla bla bla bla.......
+                Destinasi ini rekomen loh karena bla bla bla bla bla bla dan
+                lainnya...
               </p>
             </div>
           </div>
