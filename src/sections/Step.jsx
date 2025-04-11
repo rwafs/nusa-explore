@@ -37,9 +37,8 @@ const Step = () => {
 
         {/* Kanan: Rating, AI & Testimoni */}
         <div className="w-full flex flex-col md:flex-row gap-8 items-start justify-between">
-          {/* Kolom A: Rating & AI */}
           <div className="flex flex-col gap-6 w-full md:w-1/2">
-            {/* Kartu Rating */}
+            {/* Rating Card */}
             <div className="bg-white shadow-lg rounded-xl p-4 ml-12">
               <p className="text-3xl font-bold text-sky-800 mb-2 text-center">
                 4.9
@@ -61,7 +60,7 @@ const Step = () => {
               </div>
             </div>
 
-            {/* Kartu AI */}
+            {/* AI Card */}
             <div className="bg-white shadow-lg rounded-lg px-6 py-4 w-full h-32 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-teal-600 font-semibold">
                 <WiStars className="text-2xl text-teal-500" />
@@ -74,7 +73,7 @@ const Step = () => {
             </div>
           </div>
 
-          {/* Kolom B: Testimoni */}
+          {/* Testimoni */}
           <div className="w-full md:w-1/2 flex justify-center">
             <div className="rounded-xl overflow-hidden shadow-md w-full max-w-xs h-80 relative">
               <img
