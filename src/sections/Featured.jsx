@@ -1,10 +1,10 @@
 import React from "react";
-import { FaThumbsUp, FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
+import { FaThumbsUp, FaRegCheckCircle } from "react-icons/fa";
 import Pantai_Kelingking from "../assets/Pantai_Kelingking.webp";
 import Ulun_Danu from "../assets/Ulun_Danu.jpg";
 import Prambanan from "../assets/Prambanan.jpg";
 
-// Card Info Aplikasi
+// Data Info Aplikasi
 const infoCard = [
   {
     id: 1,
@@ -25,7 +25,7 @@ const infoCard = [
   },
 ];
 
-// Card Destinasi (static)
+// Data Destinasi
 const infoDestinasi = [
   {
     id: 1,
@@ -49,47 +49,49 @@ const infoDestinasi = [
     name: "Candi Prambanan",
     description:
       "Kompleks candi Hindu terbesar di Indonesia dengan arsitektur megah dan kisah Ramayana.",
-    location: "Yogyakarta, DI Yogyakarta",
+    location: "Prambanan, DI Yogyakarta",
   },
 ];
 
 const Featured = () => {
   return (
-    <section className="bg-white py-16 px-8">
-      {/* Card Info Aplikasi */}
+    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+      {/* Info Card Section */}
       <div className="flex flex-col md:flex-row justify-center gap-6 mb-12">
         {infoCard.map((info) => (
           <div
             key={info.id}
-            className="bg-white p-5 rounded-xl shadow-md flex items-center gap-4 w-full md:max-w-sm"
+            className="bg-white p-5 rounded-xl shadow-md flex items-start gap-4 w-full md:max-w-sm"
           >
-            <div className="text-teal-600 text-2xl mt-1">
+            <div className="text-teal-600 text-2xl">
               <FaRegCheckCircle />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800">{info.title}</h4>
+              <h4 className="font-semibold text-gray-800 text-base sm:text-lg">
+                {info.title}
+              </h4>
               <p className="text-sm text-gray-600">{info.description}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Judul Destinasi */}
-      <h2 className="text-center text-2xl md:text-3xl font-bold text-teal-800 mb-10">
+      {/* Judul Section */}
+      <h2 className="text-center text-2xl sm:text-3xl font-bold text-teal-800 mb-10">
         Destinasi Unggulan
       </h2>
 
-      {/* Card Info Destinasi */}
-      <div className="flex flex-col md:flex-row justify-center gap-8">
+      {/* Destinasi Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
         {infoDestinasi.map((dest) => (
           <div
             key={dest.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden max-w-xs w-full"
+            className="bg-white rounded-xl shadow-md overflow-hidden w-full max-w-xs"
           >
             <img
               src={dest.image}
               alt={dest.name}
-              className="w-full h-80 object-cover"
+              className="w-full h-64 object-cover"
             />
             <div className="p-4 space-y-2">
               <div className="flex items-center gap-2 text-teal-600 font-semibold">

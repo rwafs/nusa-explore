@@ -8,7 +8,7 @@ const Step = () => {
     <section className="py-16 px-6 md:px-18 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between gap-12">
         {/* Kiri: Text & Langkah */}
-        <div className="max-w-lg w-full">
+        <div className="max-w-lg w-full text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-semibold text-sky-900 mb-3 leading-snug">
             Jelajahi keindahan Nusantara dengan <br />
             <span className="text-sky-800">NusaExplore</span>
@@ -17,10 +17,10 @@ const Step = () => {
             Hanya dengan 3 langkah cepat
           </p>
 
-          <ul className="space-y-4 mb-6">
+          <ul className="space-y-4 mb-6 sm:justify-center">
             {["Daftar Akun", "Login", "Eksplore sepuasnya"].map(
               (item, index) => (
-                <li key={index} className="flex items-center gap-3">
+                <li key={index} className="flex items-center justify-baseline gap-3">
                   <div className="w-7 h-7 bg-teal-600 text-white rounded-full flex items-center justify-center font-semibold">
                     {index + 1}
                   </div>
@@ -36,10 +36,11 @@ const Step = () => {
         </div>
 
         {/* Kanan: Rating, AI & Testimoni */}
-        <div className="w-full flex flex-col md:flex-row gap-8 items-start justify-between">
+        <div className="w-full flex flex-col-reverse md:flex-row gap-8 items-start justify-between">
+          {/* Rating + AI */}
           <div className="flex flex-col gap-6 w-full md:w-1/2">
             {/* Rating Card */}
-            <div className="bg-white shadow-lg rounded-xl p-4 ml-12">
+            <div className="bg-white shadow-lg rounded-xl p-4 md:ml-12">
               <p className="text-3xl font-bold text-sky-800 mb-2 text-center">
                 4.9
               </p>
@@ -52,7 +53,13 @@ const Step = () => {
                         <div className="h-2 w-3/4 bg-teal-600 rounded" />
                       )}
                       {num === 4 && (
-                        <div className="h-2 w-1/4 bg-teal-600 rounded" />
+                        <div className="h-2 w-2/3 bg-teal-600 rounded" />
+                      )}
+                      {num === 3 && (
+                        <div className="h-2 w-2/6 bg-teal-600 rounded" />
+                      )}
+                      {num === 2 && (
+                        <div className="h-2 w-1/15 bg-teal-600 rounded" />
                       )}
                     </div>
                   </div>
@@ -72,9 +79,8 @@ const Step = () => {
               </p>
             </div>
           </div>
-
           {/* Testimoni */}
-          <div className="w-full md:w-1/2 flex justify-center">
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end">
             <div className="rounded-xl overflow-hidden shadow-md w-full max-w-xs h-80 relative">
               <img
                 src={test}
