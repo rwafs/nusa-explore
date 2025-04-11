@@ -1,8 +1,5 @@
 import React from "react";
-import "swiper/css";
-import "swiper/css/autoplay";
-import background from "../assets/6a3e74c52466652cd214532c28474016.png";
-import { Autoplay } from "swiper/modules";
+import background from "../assets/testimoni_bckground.png";
 import { FaEllipsisH, FaStar } from "react-icons/fa";
 
 const dataTestimoni = [
@@ -21,54 +18,37 @@ const dataTestimoni = [
     text: "Awalnya saya skeptis, tetapi aplikasi ini melebihi ekspektasi saya. Menemukan liburan akhir pekan yang sempurna berkat saran dari AI!",
     rating: 5,
   },
-  {
-    name: "Charles Muller",
-    text: "Pengalaman yang cukup solid. Aplikasi ini membantu saya merencanakan perjalanan saya lebih cepat dari sebelumnya. Masih ada beberapa bug, tetapi tidak ada yang besar.",
-    rating: 4,
-  },
-  {
-    name: "Dicky Watkins",
-    text: "Saya suka betapa intuitifnya aplikasi ini. Rekomendasinya sangat tepat, dan desainnya bersih serta mudah digunakan.",
-    rating: 4,
-  },
-  {
-    name: "Teresa Rose",
-    text: "Sangat senang menggunakan NusaExplore! Saya menemukan air terjun yang indah yang tidak akan pernah saya temukan sendiri. 5/5!",
-    rating: 5,
-  },
+  // Bisa tambahkan lebih banyak, tapi kita pakai 3 teratas aja
 ];
 
 const Testimoni = () => {
   return (
     <section
-      className="p-8"
+      className="py-16 px-6 md:px-12"
       style={{
         backgroundImage: `url(${background})`,
+        backgroundSize: "120%",
+        backgroundPosition: "cover",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <Swiper
-        modules={[Autoplay]}
-        autoplay={{ delay: 0, disableOnInteraction: false }}
-        loop={true}
-        speed={3000}
-        slidesPerView={3}
-        spaceBetween={24}
-        breakpoints={{
-          0: { slidesPerView: 1 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        className="w-full"
-      >
-        {dataTestimoni.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div className="bg-white p-4 rounded-xl shadow-md max-w-xs mx-auto">
-              <div className="flex justify-between items-start mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gray-300 rounded-full" />
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-white text-2xl md:text-3xl font-bold mb-8 text-center">
+          Apa Kata Mereka?
+        </h2>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {dataTestimoni.slice(0, 3).map((item, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gray-300 rounded-full" />
                   <div>
                     <p className="font-semibold text-sm">{item.name}</p>
-                    <div className="flex text-yellow-500 text-xs">
+                    <div className="flex text-gray-900 text-xs">
                       {Array.from({ length: item.rating }).map((_, i) => (
                         <FaStar key={i} />
                       ))}
@@ -81,9 +61,9 @@ const Testimoni = () => {
                 {item.text}
               </p>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
