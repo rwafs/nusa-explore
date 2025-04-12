@@ -8,7 +8,7 @@ i18n
   .init({
     lng: localStorage.getItem("lang") || "id",
     fallbackLng: "id",
-    ns: ["common", "destination", "home", "login"],
+    ns: ["common", "destination", "home", "login", "register"],
     defaultNS: "common",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json"

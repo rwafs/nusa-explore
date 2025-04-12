@@ -3,11 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import destinasiImg from '../img/destinasi4.png'; // pakai gambar default
 import { ArrowLeft } from 'lucide-react';
 import { FaStar } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
+import '../i18n';
 
 const DestinationDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
-
  
   const data = {
     1: {
@@ -45,7 +47,7 @@ const DestinationDetail = () => {
         onClick={() => navigate(-1)}
       >
         <ArrowLeft className="w-4 h-4" />
-        Kembali
+        {t('back')}
       </button>
 
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
