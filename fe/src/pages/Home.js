@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   MapPin,
@@ -17,8 +17,7 @@ import homeImg from "../img/home.png";
 import loginImg from "../img/login.png";
 import { useTranslation } from "react-i18next";
 import '../i18n';
-
-
+import axios from "axios";
 
 const reviews = [
   {
@@ -49,7 +48,6 @@ const trending = [
 
 
 function HomePage() {
-  
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
   const [showLanguageModal, setShowLanguageModal] = useState(false);
@@ -61,6 +59,48 @@ function HomePage() {
   };
   
   console.log("Current lang:", i18n.language);
+
+  const [user, setUser] = useState({});
+  const token = localStorage.getItem("token");
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
+  };
+  
+  useEffect(() => {
+    if(!token) {
+      navigate("/login");
+    } else {
+      fetchUser();
+    }
+  }, [navigate, token]);
+
+  const logoutHandler = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleSidebarClick = (icon) => {
     switch (icon) {
@@ -80,7 +120,7 @@ function HomePage() {
         navigate("/settings");
         break;
       case "LogOut":
-        navigate("/login");
+        logoutHandler();  
         break;
       default:
         console.log(`${icon} clicked`);
@@ -123,7 +163,7 @@ function HomePage() {
             <Bell className="w-5 h-5 text-gray-500" />
             <img src={loginImg} alt="User" className="w-8 h-8 rounded-full" />
             <div>
-              <p className="font-medium text-sm">John Doe</p>
+              <p className="font-medium text-sm">{user.name || "User"}</p>
               <p className="text-xs text-blue-600 cursor-pointer">User</p>
             </div>
           </div>

@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import loginImg from '../img/login.png'; 
 import { useTranslation } from "react-i18next";
 import '../i18n';
+import axios from 'axios';
 
 const LoginPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const goToHome = () => {
+    navigate('/home');
+  }
   const goToRegister = () => {
     navigate('/signin'); 
   };
-  
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [validation, setValidation] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      goToHome();
+    }
+  }, [navigate]);
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8000/api/login', {
+        email: email,
+        password: password,
+      });
+      localStorage.setItem('token', response.data.token);
+      console.log(response.data);
+      goToHome();
+    } catch (error) {
+      setValidation(error.response.data.errors);
+    }
+  };
+  
   return (
     <div
       className="flex min-h-screen font-['Lexend_Deca']"
@@ -41,7 +69,7 @@ const LoginPage = () => {
             {t('login:description')}
           </p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={loginHandler}>
             <div>
               <label className="block mb-1 text-sm text-gray-700">
                 {t('login:email_label')}
@@ -50,7 +78,12 @@ const LoginPage = () => {
                 type="email"
                 placeholder={t('login:email_placeholder')}
                 className="w-full px-4 py-2 rounded-full bg-white/80 outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+              {validation.email && (
+                <p className="text-red-500 text-xs mt-1">{validation.email[0]}</p>
+              )}
             </div>
             <div>
               <label className="block mb-1 text-sm text-gray-700">
@@ -60,9 +93,14 @@ const LoginPage = () => {
                 type="password"
                 placeholder={t('login:password_placeholder')}
                 className="w-full px-4 py-2 rounded-full bg-white/80 outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
+              {validation.password && (
+                <p className="text-red-500 text-xs mt-1">{validation.password[0]}</p>
+              )}
             </div>
-            <button className="bg-white text-gray-800 font-semibold px-6 py-2 rounded-full block mx-auto hover:bg-gray-100">
+            <button className="bg-white text-gray-800 font-semibold px-6 py-2 rounded-full block mx-auto hover:bg-gray-100" type="submit">
               {t('login:submit')}
             </button>
           </form>
