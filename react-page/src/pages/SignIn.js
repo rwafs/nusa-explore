@@ -1,14 +1,36 @@
-import React from 'react';
-import loginImg from '../img/login.png'; 
+import React from "react";
+import loginImg from "../img/login.png";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const handleSidebarClick = (icon) => {
+    switch (icon) {
+      case "LogIn":
+        navigate("/login");
+        break;
+      default:
+        console.log(`${icon} clicked`);
+    }
+  };
+
+  const navigate = useNavigate();
+  const [showLanguageModal, setShowLanguageModal] = React.useState(false);
+  const changeLanguage = (lang) => {
+    localStorage.setItem("language", lang);
+    setShowLanguageModal(false);
+  };
+
   return (
     <div className="flex min-h-screen font-['Lexend_Deca']">
       {/* Left Form Section */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8 bg-gradient-to-b from-blue-100 to-blue-200">
         <div className="max-w-sm w-full">
-          <h2 className="text-3xl font-bold text-blue-900 mb-2 text-center">Create an Account</h2>
-          <p className="text-sm text-gray-600 mb-6 text-center">Daftar untuk mendapatkan pengalaman berlibur terbaik</p>
+          <h2 className="text-3xl font-bold text-blue-900 mb-2 text-center">
+            Create an Account
+          </h2>
+          <p className="text-sm text-gray-600 mb-6 text-center">
+            Daftar untuk mendapatkan pengalaman berlibur terbaik
+          </p>
 
           <form className="space-y-4">
             <div>
@@ -41,12 +63,18 @@ const SignIn = () => {
           </form>
 
           <p className="text-center text-sm mt-4 text-gray-600">
-            Sudah punya akun? <span className="text-blue-800 font-medium cursor-pointer">Log In</span>
+            Sudah punya akun?{" "}
+            <span
+              onClick={() => handleSidebarClick("LogIn")}
+              className="text-blue-800 font-medium cursor-pointer"
+            >
+              Log In
+            </span>
           </p>
         </div>
       </div>
 
-     {/* Layout Gambarnya */}
+      {/* Layout Gambarnya */}
       <div className="hidden md:flex md:w-1/2 justify-center items-center bg-gradient-to-b from-blue-100 to-blue-200">
         <div className="rounded-2xl overflow-hidden shadow-lg mt-6 mb-6 mr-6">
           <img

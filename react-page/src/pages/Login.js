@@ -1,12 +1,30 @@
-import React from 'react';
-import loginImg from '../img/login.png'; 
+import React from "react";
+import loginImg from "../img/login.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const handleSidebarClick = (icon) => {
+    switch (icon) {
+      case "SignIn":
+        navigate("/signin");
+        break;
+      default:
+        console.log(`${icon} clicked`);
+    }
+  };
+
+  const navigate = useNavigate();
+  const [showLanguageModal, setShowLanguageModal] = React.useState(false);
+  const changeLanguage = (lang) => {
+    localStorage.setItem("language", lang);
+    setShowLanguageModal(false);
+  };
+
   return (
     <div
       className="flex min-h-screen font-['Lexend_Deca']"
       style={{
-        background: 'linear-gradient(to bottom, #FEFFEB, #91927D)',
+        background: "linear-gradient(to bottom, #FEFFEB, #91927D)",
       }}
     >
       {/* Gambar di Kiri */}
@@ -23,7 +41,9 @@ const LoginPage = () => {
       {/* Form di Kanan */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-8">
         <div className="max-w-sm w-full">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">Login</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
+            Login
+          </h2>
           <p className="text-sm text-gray-700 mb-6 text-center">
             Masuk ke akun untuk menggunakan aplikasi
           </p>
@@ -38,7 +58,9 @@ const LoginPage = () => {
               />
             </div>
             <div>
-              <label className="block mb-1 text-sm text-gray-700">Password</label>
+              <label className="block mb-1 text-sm text-gray-700">
+                Password
+              </label>
               <input
                 type="password"
                 placeholder="password"
@@ -51,8 +73,11 @@ const LoginPage = () => {
           </form>
 
           <p className="text-center text-sm mt-4 text-gray-700">
-            Belum punya akun?{' '}
-            <span className="text-gray-900 font-medium cursor-pointer hover:underline">
+            Belum punya akun?{" "}
+            <span
+              onClick={() => handleSidebarClick("SignIn")}
+              className="text-gray-900 font-medium cursor-pointer hover:underline"
+            >
               Daftar disini
             </span>
           </p>
