@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import loginImg from '../img/login.png'; 
 import axios from 'axios';
 
 const SignIn = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,9 +11,18 @@ const SignIn = () => {
   const [validation, setValidation] = useState([]);
 
   const navigate = useNavigate();
+  const goToHome = () => {
+    navigate('/home'); 
+  };
   const goToLogin = () => {
     navigate('/login'); 
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/home'); 
+    }
+  }, [navigate]);
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -24,8 +32,9 @@ const SignIn = () => {
         email: email,
         password: password,
       });
+      localStorage.setItem('token', response.data.token);
       console.log(response.data);
-      navigate('/login');
+      goToHome();
     } catch (error) {
       setValidation(error.response.data.errors);
     }
