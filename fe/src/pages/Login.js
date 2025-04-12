@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import loginImg from '../img/login.png'; 
 import { useTranslation } from "react-i18next";
 import '../i18n';
 
 const LoginPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const goToRegister = () => {
+    navigate('/signin'); 
+  };
+  
 
   return (
     <div
@@ -62,7 +69,7 @@ const LoginPage = () => {
 
           <p className="text-center text-sm mt-4 text-gray-700">
             {t('login:no_account')}{' '}
-            <span className="text-gray-900 font-medium cursor-pointer hover:underline">
+            <span className="text-gray-900 font-medium cursor-pointer hover:underline" onClick={goToRegister}>
               {t('login:register_here')}
             </span>
           </p>
