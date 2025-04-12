@@ -33,6 +33,7 @@ const LoginPage = () => {
         email: email,
         password: password,
       });
+      localStorage.setItem("roles", JSON.stringify(response.data.role));
       localStorage.setItem('token', response.data.token);
       console.log(response.data);
       goToHome();

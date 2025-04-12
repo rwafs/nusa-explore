@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home, MapPin, Star, Languages, Settings, LogOut, Bell, Search } from "lucide-react";
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import destinasiImg from '../img/destinasi4.png';
 import profile from '../img/login.png';
 import { useTranslation } from "react-i18next";
 import '../i18n';
+import axios from "axios";
 
 const destinations = Array.from({ length: 12 }).map((_, index) => ({
   id: index,
@@ -31,6 +32,48 @@ const Destination = () => {
     localStorage.setItem('lang', lng);
     setShowLanguageModal(false);
   };
+
+  const [user, setUser] = useState({});
+  const token = localStorage.getItem("token");
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
+  };
+  
+  useEffect(() => {
+    if(!token) {
+      navigate("/login");
+    } else {
+      fetchUser();
+    }
+  }, [navigate, token]);
+
+  const logoutHandler = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState('');
@@ -70,7 +113,7 @@ const Destination = () => {
         navigate("/settings");
         break;
       case "LogOut":
-        navigate("/login");
+        logoutHandler();
         break;
       default:
         console.log(`${icon} clicked`);
@@ -122,7 +165,7 @@ const Destination = () => {
             <Bell className="w-5 h-5 text-gray-600" />
             <img src={profile} alt="User" className="w-8 h-8 rounded-full" />
             <div>
-              <p className="text-sm font-medium">John Doe</p>
+              <p className="text-sm font-medium">{user.name}</p>
               <p className="text-xs text-blue-600">User</p>
             </div>
           </div>

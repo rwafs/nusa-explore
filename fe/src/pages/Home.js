@@ -62,6 +62,8 @@ function HomePage() {
 
   const [user, setUser] = useState({});
   const token = localStorage.getItem("token");
+  const roles = JSON.parse(localStorage.getItem("roles"));
+  console.log("role:", roles);
 
   const fetchUser = async () => {
     try {
@@ -71,6 +73,7 @@ function HomePage() {
         },
       });
       setUser(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 401) {
@@ -164,7 +167,7 @@ function HomePage() {
             <img src={loginImg} alt="User" className="w-8 h-8 rounded-full" />
             <div>
               <p className="font-medium text-sm">{user.name || "User"}</p>
-              <p className="text-xs text-blue-600 cursor-pointer">User</p>
+              <p className="text-xs text-blue-600 cursor-pointer">{roles || "user"}</p>
             </div>
           </div>
         </div>
