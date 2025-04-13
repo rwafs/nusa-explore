@@ -35,25 +35,27 @@ const Destination = () => {
 
   const [user, setUser] = useState({});
   const token = localStorage.getItem("token");
+  const roles = JSON.parse(localStorage.getItem("roles"));
+  console.log("role:", roles);
 
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
-    } catch (error) {
-      console.error(error);
-      if (error.response && error.response.status === 401) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      }
-    }
-  };
-  
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      }
+    };
+  
     if(!token) {
       navigate("/login");
     } else {
@@ -63,7 +65,7 @@ const Destination = () => {
 
   const logoutHandler = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/logout", {}, {
+      await axios.post("http://localhost:8000/api/logout", {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -166,7 +168,7 @@ const Destination = () => {
             <img src={profile} alt="User" className="w-8 h-8 rounded-full" />
             <div>
               <p className="text-sm font-medium">{user.name}</p>
-              <p className="text-xs text-blue-600">User</p>
+              <p className="text-xs text-blue-600">{roles || "user"}</p>
             </div>
           </div>
         </div>
@@ -207,7 +209,7 @@ const Destination = () => {
         {/* Section Heading & Filter */}
         <div className="flex justify-between items-start gap-6">
           <div className="w-full">
-            <h2 className="text-2xl font-bold mb-6">Ke Mana Tujuanmu Hari Ini?</h2>
+            <h2 className="text-2xl font-bold mb-6">{t("destination:destinations")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {currentDestinations.map((dest) => (
                 <div key={dest.id} className="bg-white rounded-lg shadow overflow-hidden">
