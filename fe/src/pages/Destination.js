@@ -4,7 +4,7 @@ import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Input } from "../components/ui/input"; 
 import destinasiImg from '../img/destinasi4.png';
-import profile from '../img/login.png';
+import profile from '../img/profile.png';
 import { useTranslation } from "react-i18next";
 import '../i18n';
 import axios from "axios";
