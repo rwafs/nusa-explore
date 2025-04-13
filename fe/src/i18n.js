@@ -6,17 +6,16 @@ i18n
   .use(initReactI18next)
   .use(Backend)
   .init({
-    lng: localStorage.getItem("lang") || "id",
-    fallbackLng: "id",
-    ns: ["common", "destination", "home", "login", "register"],
-    defaultNS: "common",
+    lng: localStorage.getItem('lang') || 'id',
+    fallbackLng: 'id',
+    ns: ['common', 'destination', 'home', 'setting', 'login', 'register'],
+    defaultNS: 'common',
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.json"
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   });
-
 
 export default i18n;

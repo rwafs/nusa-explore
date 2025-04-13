@@ -31,9 +31,8 @@ function SettingsPage() {
   const [user, setUser] = useState({});
   const token = localStorage.getItem('token');
   const roles = JSON.parse(localStorage.getItem('roles'));
-  console.log('role:', roles);
 
-  const [activeMenu, setActiveMenu] = useState('Profile');
+  const [activeMenu, setActiveMenu] = useState(t('setting:menu.profile'));
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [editing, setEditing] = useState(false);
@@ -42,7 +41,6 @@ function SettingsPage() {
   const [newPassword, setNewPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  // Backend API
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -54,33 +52,30 @@ function SettingsPage() {
         setUser(response.data);
         setNameInput(response.data.name);
         setEmailInput(response.data.email);
-        // console.log(response.data);
       } catch (error) {
         console.error(error);
-        if (error.response && error.response.status === 401) {
+        if (error.response?.status === 401) {
           localStorage.removeItem('token');
           navigate('/login');
         }
       }
     };
 
+    setActiveMenu(t('setting:menu.profile'));
+
     if (!token) {
       navigate('/login');
     } else {
       fetchUser();
     }
-  }, [navigate, token]);
+  }, [navigate, token, t]);
 
   const logoutHandler = async () => {
     try {
       await axios.post(
         'http://localhost:8000/api/logout',
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       localStorage.removeItem('token');
       localStorage.removeItem('roles');
@@ -117,39 +112,32 @@ function SettingsPage() {
 
   const handleDeleteAccount = () => {
     setShowDeleteConfirm(false);
-    alert('Akun berhasil dihapus.');
+    alert(t('setting:delete.success'));
   };
 
   const handleSaveProfile = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailInput)) {
-      alert('Format email tidak valid.');
+      alert(t('setting:alerts.invalid_email'));
       return;
     }
 
     try {
       const response = await axios.put(
         'http://localhost:8000/api/profile',
-        {
-          name: nameInput,
-          email: emailInput,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { name: nameInput, email: emailInput },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      alert('Profil berhasil disimpan.');
+      alert(t('setting:alerts.profile_saved'));
       setEditing(false);
       setUser(response.data.user);
     } catch (error) {
-      if (error.response && error.response.status === 422) {
-        alert(error.response.data.message || 'Validasi gagal.');
-      } else {
-        alert('Gagal menyimpan profil.');
-      }
+      alert(
+        error.response?.status === 422
+          ? error.response.data.message || t('setting:alerts.validation_failed')
+          : t('setting:alerts.save_failed')
+      );
       console.error(error);
     }
   };
@@ -158,54 +146,42 @@ function SettingsPage() {
     setPasswordError('');
 
     if (newPassword.length < 8) {
-      setPasswordError('Password baru minimal 8 karakter.');
+      setPasswordError(t('setting:password.min_length'));
       return;
     }
 
     try {
       const response = await axios.put(
         'http://localhost:8000/api/password',
-        {
-          old_password: currentPassword,
-          new_password: newPassword,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { old_password: currentPassword, new_password: newPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.data.success) {
-        alert('Password berhasil diubah.');
-        // Reset form
+        alert(t('setting:password.success'));
         setCurrentPassword('');
         setNewPassword('');
         setEditing(false);
       } else {
-        setPasswordError(response.data.message || 'Gagal mengubah password.');
+        setPasswordError(
+          response.data.message || t('setting:password.error.general')
+        );
       }
     } catch (error) {
       console.error(error);
       if (error.response) {
         if (error.response.status === 422) {
-          if (error.response.data.errors) {
-            const errors = error.response.data.errors;
-            setPasswordError(
-              errors.old_password?.[0] ||
-                errors.new_password?.[0] ||
-                'Validasi gagal'
-            );
-          } else {
-            setPasswordError(
-              error.response.data.message || 'Password saat ini salah.'
-            );
-          }
+          const errors = error.response.data.errors || {};
+          setPasswordError(
+            errors.old_password?.[0] ||
+              errors.new_password?.[0] ||
+              t('setting:password.error.validation')
+          );
         } else {
-          setPasswordError('Terjadi kesalahan pada server.');
+          setPasswordError(t('setting:password.error.server'));
         }
       } else {
-        setPasswordError('Tidak dapat terhubung ke server.');
+        setPasswordError(t('setting:password.error.connection'));
       }
     }
   };
@@ -262,10 +238,10 @@ function SettingsPage() {
             <img src={profile} alt='User' className='w-8 h-8 rounded-full' />
             <div>
               <p className='font-medium text-sm lowercase'>
-                {user.name || 'User'}
+                {user.name || 'user'}
               </p>
               <p className='text-xs text-blue-600 cursor-pointer lowercase'>
-                {roles || 'User'}
+                {roles || 'user'}
               </p>
             </div>
           </div>
@@ -275,14 +251,16 @@ function SettingsPage() {
           <div className='w-64 bg-[#D6F0F7] p-6 flex flex-col justify-between rounded-xl shadow-lg'>
             <div>
               <div className='flex items-center mb-10 text-xl font-bold text-blue-800'>
-                <span className='text-2xl font-extrabold'>Menu</span>
+                <span className='text-2xl font-extrabold'>
+                  {t('setting:menu.title')}
+                </span>
               </div>
               <ul className='space-y-5'>
                 {[
-                  'Profile',
-                  'Change password',
-                  'Become a Destination Manager',
-                  'Hapus Akun',
+                  t('setting:menu.profile'),
+                  t('setting:menu.change_password'),
+                  t('setting:menu.become_manager'),
+                  t('setting:menu.delete_account'),
                 ].map((item) => (
                   <li
                     key={item}
@@ -292,12 +270,12 @@ function SettingsPage() {
                     onClick={() => setActiveMenu(item)}
                   >
                     <span>
-                      {item === 'Profile' && <FaUser />}
-                      {item === 'Change password' && <FaLock />}
-                      {item === 'Become a Destination Manager' && (
+                      {item === t('setting:menu.profile') && <FaUser />}
+                      {item === t('setting:menu.change_password') && <FaLock />}
+                      {item === t('setting:menu.become_manager') && (
                         <FaMountain />
                       )}
-                      {item === 'Hapus Akun' && <FaTrash />}
+                      {item === t('setting:menu.delete_account') && <FaTrash />}
                     </span>
                     <span>{item}</span>
                   </li>
@@ -307,7 +285,7 @@ function SettingsPage() {
           </div>
 
           <div className='flex-1 p-10 overflow-y-auto'>
-            {activeMenu === 'Profile' && (
+            {activeMenu === t('setting:menu.profile') && (
               <div className='bg-white rounded-2xl shadow-lg p-8 space-y-6'>
                 <div className='flex items-center space-x-6'>
                   <div className='relative'>
@@ -321,23 +299,25 @@ function SettingsPage() {
                   </div>
                   <div>
                     <h2 className='text-2xl font-bold'>
-                      {user.name || 'User'}
+                      {user.name || 'user'}
                     </h2>
                     <p className='text-sm text-gray-500'>
-                      Destination manager of [nm_wisata]
+                      {t('setting:profile.destination_manager')}
                     </p>
                   </div>
                   <button
                     className='ml-auto bg-blue-600 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded-xl border'
                     onClick={() => setEditing(true)}
                   >
-                    Edit Profile
+                    {t('setting:profile.edit_profile')}
                   </button>
                 </div>
 
                 <div className='space-y-4 max-w-xl'>
                   <div>
-                    <label className='block text-gray-700'>User name</label>
+                    <label className='block text-gray-700'>
+                      {t('setting:profile.username')}
+                    </label>
                     <input
                       type='text'
                       className='w-full px-4 py-2 rounded bg-gray-100'
@@ -347,7 +327,9 @@ function SettingsPage() {
                     />
                   </div>
                   <div>
-                    <label className='block text-gray-700'>Email</label>
+                    <label className='block text-gray-700'>
+                      {t('setting:profile.email')}
+                    </label>
                     <input
                       type='email'
                       className='w-full px-4 py-2 rounded bg-gray-100'
@@ -361,9 +343,8 @@ function SettingsPage() {
                       <button
                         className='bg-blue-600 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded-xl border'
                         onClick={handleSaveProfile}
-                        type='submit'
                       >
-                        Save Changes
+                        {t('setting:profile.save_changes')}
                       </button>
                     </div>
                   )}
@@ -371,7 +352,7 @@ function SettingsPage() {
               </div>
             )}
 
-            {activeMenu === 'Change password' && (
+            {activeMenu === t('setting:menu.change_password') && (
               <div className='bg-white rounded-2xl shadow-lg p-8 space-y-6'>
                 <div className='flex items-center space-x-6'>
                   <div className='relative'>
@@ -385,24 +366,24 @@ function SettingsPage() {
                   </div>
                   <div>
                     <h2 className='text-2xl font-bold'>
-                      {user.name || 'User'}
+                      {user.name || 'user'}
                     </h2>
                     <p className='text-sm text-gray-500'>
-                      Destination manager of [nm_wisata]
+                      {t('setting:profile.destination_manager')}
                     </p>
                   </div>
                   <button
                     className='ml-auto bg-blue-600 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded-xl border'
                     onClick={() => setEditing(true)}
                   >
-                    Edit Password
+                    {t('setting:password.edit_password')}
                   </button>
                 </div>
 
                 <div className='space-y-4 max-w-xl'>
                   <div>
                     <label className='block text-gray-700'>
-                      Current Password
+                      {t('setting:password.current')}
                     </label>
                     <input
                       type='password'
@@ -412,7 +393,9 @@ function SettingsPage() {
                     />
                   </div>
                   <div>
-                    <label className='block text-gray-700'>New Password</label>
+                    <label className='block text-gray-700'>
+                      {t('setting:password.new')}
+                    </label>
                     <input
                       type='password'
                       className='w-full px-4 py-2 rounded bg-gray-100'
@@ -423,14 +406,13 @@ function SettingsPage() {
                   {passwordError && (
                     <p className='text-red-500 text-sm'>{passwordError}</p>
                   )}
-
                   {editing && (
                     <div className='flex justify-end'>
                       <button
                         className='bg-blue-600 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded-xl border'
                         onClick={handleSavePassword}
                       >
-                        Save Changes
+                        {t('setting:profile.save_changes')}
                       </button>
                     </div>
                   )}
@@ -438,22 +420,19 @@ function SettingsPage() {
               </div>
             )}
 
-            {activeMenu === 'Become a Destination Manager' && (
+            {activeMenu === t('setting:menu.become_manager') && (
               <div className='text-gray-700 text-lg'>
-                <p>
-                  Formulir atau informasi untuk menjadi manajer destinasi akan
-                  ditampilkan di sini.
-                </p>
+                <p>{t('setting:manager.info')}</p>
               </div>
             )}
 
-            {activeMenu === 'Hapus Akun' && (
+            {activeMenu === t('setting:menu.delete_account') && (
               <div>
                 <button
                   className='bg-red-500 hover:bg-red-700 text-white px-6 py-2 rounded'
                   onClick={() => setShowDeleteConfirm(true)}
                 >
-                  Konfirmasi Hapus Akun
+                  {t('setting:delete.confirm')}
                 </button>
               </div>
             )}
@@ -462,20 +441,20 @@ function SettingsPage() {
               <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
                 <div className='bg-white p-6 rounded-xl shadow-lg max-w-sm text-center space-y-4'>
                   <p className='text-lg font-semibold'>
-                    Apakah kamu yakin ingin menghapus akun?
+                    {t('setting:delete.confirmation')}
                   </p>
                   <div className='flex justify-center space-x-4'>
                     <button
                       onClick={() => setShowDeleteConfirm(false)}
                       className='px-4 py-2 rounded bg-gray-300'
                     >
-                      Batal
+                      {t('setting:delete.cancel')}
                     </button>
                     <button
                       onClick={handleDeleteAccount}
                       className='px-4 py-2 rounded bg-red-500 text-white'
                     >
-                      Hapus
+                      {t('setting:delete.delete')}
                     </button>
                   </div>
                 </div>
