@@ -14,7 +14,9 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { useNavigate } from "react-router-dom";
 import homeImg from "../img/home.png";
-import loginImg from "../img/login.png";
+import profile from "../img/profile.png";
+import trendingImg from "../img/login.png";
+import placeImg from "../img/login.png";
 import { useTranslation } from "react-i18next";
 import '../i18n';
 import axios from "axios";
@@ -26,7 +28,7 @@ const reviews = [
     date: "2/02/2022",
     text: "Lorem ipsum dolor sit amet...",
     user: "John Doe",
-    avatar: "../img/login.png",
+    avatar: placeImg,
   },
   {
     id: 2,
@@ -34,7 +36,7 @@ const reviews = [
     date: "2/02/2022",
     text: "Lorem ipsum dolor sit amet...",
     user: "John Doe",
-    avatar: "../img/login.png",
+    avatar: placeImg,
   },
 ];
 
@@ -165,7 +167,7 @@ function HomePage() {
           </div>
           <div className="flex items-center gap-3">
             <Bell className="w-5 h-5 text-gray-500" />
-            <img src={loginImg} alt="User" className="w-8 h-8 rounded-full" />
+            <img src={profile} alt="User" className="w-8 h-8 rounded-full" />
             <div>
               <p className="font-medium text-sm">{user.name || "User"}</p>
               <p className="text-xs text-blue-600 cursor-pointer">{roles || "user"}</p>
@@ -236,7 +238,7 @@ function HomePage() {
                 <li key={item.id} className="flex items-center space-x-3">
                   <span className="font-bold text-sm">{idx + 1}</span>
                   <img
-                    src={loginImg}
+                    src={trendingImg}
                     alt="Trending"
                     className="w-10 h-10 rounded object-cover"
                   />
