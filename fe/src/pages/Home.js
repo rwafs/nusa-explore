@@ -65,25 +65,25 @@ function HomePage() {
   const roles = JSON.parse(localStorage.getItem("roles"));
   console.log("role:", roles);
 
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
-      // console.log(response.data);
-    } catch (error) {
-      console.error(error);
-      if (error.response && error.response.status === 401) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      }
-    }
-  };
-  
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data);
+        // console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        if (error.response && error.response.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      }
+    };
+
     if(!token) {
       navigate("/login");
     } else {
@@ -93,12 +93,13 @@ function HomePage() {
 
   const logoutHandler = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/logout", {}, {
+      await axios.post("http://localhost:8000/api/logout", {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       localStorage.removeItem("token");
+      localStorage.removeItem("roles");
       navigate("/login");
     } catch (error) {
       console.error(error);

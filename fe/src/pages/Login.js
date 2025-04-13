@@ -8,9 +8,7 @@ import axios from 'axios';
 const LoginPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const goToHome = () => {
-    navigate('/home');
-  }
+
   const goToRegister = () => {
     navigate('/signin'); 
   };
@@ -22,7 +20,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      goToHome();
+      navigate('/home');
     }
   }, [navigate]);
 
@@ -36,7 +34,7 @@ const LoginPage = () => {
       localStorage.setItem("roles", JSON.stringify(response.data.role));
       localStorage.setItem('token', response.data.token);
       console.log(response.data);
-      goToHome();
+      navigate('/home');
     } catch (error) {
       setValidation(error.response.data.errors);
     }
