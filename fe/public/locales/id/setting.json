@@ -1,0 +1,48 @@
+{
+  "menu": {
+    "title": "Menu",
+    "profile": "Profil",
+    "change_password": "Ubah Password",
+    "become_manager": "Menjadi Manajer Destinasi",
+    "delete_account": "Hapus Akun"
+  },
+  "profile": {
+    "title": "Profil",
+    "username": "Nama Pengguna",
+    "email": "Email",
+    "destination_manager": "Manajer destinasi dari [nm_wisata]",
+    "edit_profile": "Edit Profil",
+    "save_changes": "Simpan Perubahan"
+  },
+  "password": {
+    "title": "Ubah Password",
+    "current": "Password Saat Ini",
+    "new": "Password Baru",
+    "edit_password": "Edit Password",
+    "min_length": "Password baru minimal 8 karakter",
+    "success": "Password berhasil diubah",
+    "error": {
+      "current_wrong": "Password saat ini salah",
+      "validation": "Validasi gagal",
+      "server": "Terjadi kesalahan pada server",
+      "connection": "Tidak dapat terhubung ke server"
+    }
+  },
+  "manager": {
+    "info": "Formulir atau informasi untuk menjadi manajer destinasi akan ditampilkan di sini."
+  },
+  "delete": {
+    "confirm": "Konfirmasi Hapus Akun",
+    "confirmation": "Apakah kamu yakin ingin menghapus akun?",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "success": "Akun berhasil dihapus",
+    "error": "Gagal menghapus akun"
+  },
+  "alerts": {
+    "invalid_email": "Format email tidak valid",
+    "profile_saved": "Profil berhasil disimpan",
+    "save_failed": "Gagal menyimpan profil",
+    "validation_failed": "Validasi gagal"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "menu": {
+    "title": "Menu",
+    "profile": "Profile",
+    "change_password": "Change Password",
+    "become_manager": "Become a Destination Manager",
+    "delete_account": "Delete Account"
+  },
+  "profile": {
+    "title": "Profile",
+    "username": "User name",
+    "email": "Email",
+    "destination_manager": "Destination manager of [nm_wisata]",
+    "edit_profile": "Edit Profile",
+    "save_changes": "Save Changes"
+  },
+  "password": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "edit_password": "Edit Password",
+    "min_length": "New password must be at least 8 characters",
+    "success": "Password changed successfully",
+    "error": {
+      "current_wrong": "The current password is incorrect",
+      "validation": "Validation failed",
+      "server": "Server error occurred",
+      "connection": "Cannot connect to server"
+    }
+  },
+  "manager": {
+    "info": "Form or information to become a destination manager will be displayed here."
+  },
+  "delete": {
+    "confirm": "Confirm Delete Account",
+    "confirmation": "Are you sure you want to delete your account?",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "success": "Account deleted successfully",
+    "error": "Failed to delete account"
+  },
+  "alerts": {
+    "invalid_email": "Invalid email format",
+    "profile_saved": "Profile saved successfully",
+    "save_failed": "Failed to save profile",
+    "validation_failed": "Validation failed"
+  }
+}
