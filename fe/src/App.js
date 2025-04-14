@@ -8,6 +8,7 @@ import Destination from './pages/Destination';
 import DestinationDetail from './pages/DestinationDetail';
 import HistoryReview from './pages/HistoryReviewPage';
 import Settings from './pages/Settings';
+import Setingan from './pages/Setingan'; //nanti ini tlg dihapus
 import Translate from './pages/Translate';
 import Reviews from './pages/Reviews';
 import Trending from './pages/Trending';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/reviews" element={<RoleChecker element={<Reviews />} allowedRoles={['superadmin','admin', 'user']} />} />
           <Route path="/trending" element={<RoleChecker element={<Trending />} allowedRoles={['superadmin','admin', 'user']} />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/setingan" element={<Setingan />} />
           <Route path="/historyreview" element={<HistoryReview />} />
           <Route path="/translate" element={<Translate />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
