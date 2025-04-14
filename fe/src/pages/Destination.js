@@ -109,7 +109,7 @@ const Destination = () => {
         navigate("/rating");
         break;
       case "Languages":
-        setShowLanguageModal(true);
+        navigate('/translate');
         break;
       case "Settings":
         navigate("/settings");
@@ -133,7 +133,7 @@ const Destination = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen font-['Lexend_Deca']">
       {/* Sidebar */}
       <div className="w-16 bg-teal-700 flex flex-col items-center justify-between py-6 fixed h-full text-black">
         <div className="space-y-6">

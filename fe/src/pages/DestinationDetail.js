@@ -41,7 +41,7 @@ const DestinationDetail = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
+    <div className="min-h-screen p-6 bg-gray-50 font-['Lexend_Deca']">
       <button 
         className="flex items-center gap-2 text-teal-600 hover:underline mb-6"
         onClick={() => navigate(-1)}

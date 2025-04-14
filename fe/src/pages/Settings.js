@@ -187,7 +187,7 @@ function SettingsPage() {
   };
 
   return (
-    <div className='flex h-screen'>
+    <div className="flex h-screen font-['Lexend_Deca']">
       {/* Sidebar */}
       <div className='w-16 bg-teal-700 flex flex-col items-center justify-between py-6 text-black fixed h-full'>
         <div className='space-y-6 cursor-pointer'>

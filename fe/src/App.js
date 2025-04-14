@@ -6,10 +6,11 @@ import Home from './pages/Home';
 import LandingPage from './pages/LandingPage';
 import Destination from './pages/Destination';
 import DestinationDetail from './pages/DestinationDetail';
-import HistoryReview from './pages/HistoryReviewPage.js';
+import HistoryReview from './pages/HistoryReviewPage';
+import Settings from './pages/Settings';
+import Translate from './pages/Translate';
 import Reviews from './pages/Reviews';
 import Trending from './pages/Trending';
-import Settings from './pages/Settings';
 import Unauthorized from './pages/Unauthorized';
 import RoleChecker from './components/RoleChecker';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/trending" element={<RoleChecker element={<Trending />} allowedRoles={['superadmin','admin', 'user']} />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/historyreview" element={<HistoryReview />} />
+          <Route path="/translate" element={<Translate />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
