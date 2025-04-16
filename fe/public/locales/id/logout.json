@@ -1,0 +1,12 @@
+{
+  "logout": {
+    "confirm_title": "Konfirmasi Logout",
+    "confirm_message": "Apakah Anda yakin ingin logout?",
+    "yes": "Ya, Logout",
+    "no": "Batal",
+    "success_title": "Berhasil Logout",
+    "success_message": "Anda telah berhasil logout.",
+    "error_title": "Error",
+    "error_message": "Gagal logout. Silakan coba lagi."
+  }
+}

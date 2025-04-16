@@ -1,0 +1,22 @@
+{
+  "title": "Masuk ke Akun",
+  "description": "Masuk untuk mengakses akun kamu.",
+  "image_alt": "Gambar login",
+  "email_label": "Email",
+  "email_placeholder": "johndoe@gmail.com",
+  "password_label": "Kata Sandi",
+  "password_placeholder": "password",
+  "submit": "Masuk",
+  "no_account": "Belum punya akun?",
+  "register_here": "Daftar disini",
+  "success": {
+    "title": "Login Berhasil!",
+    "message": "Anda berhasil masuk."
+  },
+  "error": {
+    "unauthorized_title": "Tidak Diizinkan",
+    "unauthorized_message": "Email atau password salah",
+    "general_title": "Error",
+    "general_message": "Terjadi kesalahan. Silakan coba lagi."
+  }
+}

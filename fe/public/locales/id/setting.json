@@ -1,0 +1,43 @@
+{
+  "menu": {
+    "title": "Pengaturan",
+    "profile": "Profil",
+    "change_password": "Ubah Kata Sandi",
+    "become_manager": "Menjadi Manajer",
+    "delete_account": "Hapus Akun"
+  },
+  "alerts": {
+    "invalid_email": "Masukkan alamat email yang valid.",
+    "success_title": "Berhasil",
+    "profile_saved": "Profil berhasil diperbarui.",
+    "error_title": "Terjadi Kesalahan",
+    "validation_failed": "Validasi gagal.",
+    "save_failed": "Gagal menyimpan profil."
+  },
+  "password": {
+    "success_title": "Kata Sandi Diubah",
+    "success": "Kata sandi Anda berhasil diperbarui.",
+    "min_length": "Kata sandi baru minimal 8 karakter.",
+    "error": {
+      "title": "Kesalahan Kata Sandi",
+      "general": "Gagal mengubah kata sandi.",
+      "server": "Terjadi kesalahan server.",
+      "validation": "Harap isi kolom yang diperlukan dengan benar.",
+      "connection": "Terjadi kesalahan koneksi. Coba lagi nanti."
+    }
+  },
+  "delete": {
+    "confirm_title": "Hapus Akun",
+    "confirmation": "Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.",
+    "delete": "Hapus",
+    "cancel": "Batal",
+    "error_title": "Kesalahan Penghapusan",
+    "password_required": "Masukkan kata sandi Anda untuk konfirmasi.",
+    "success_title": "Akun Dihapus",
+    "success": "Akun Anda berhasil dihapus.",
+    "error": "Gagal menghapus akun.",
+    "unauthorized": "Tindakan tidak sah",
+    "validation_error": "Harap masukkan kata sandi yang diminta.",
+    "connection_error": "Gagal terhubung ke server."
+  }
+}

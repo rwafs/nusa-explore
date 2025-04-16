@@ -1,0 +1,57 @@
+{
+  "menu": {
+    "title": "Settings",
+    "profile": "Profile",
+    "change_password": "Change Password",
+    "become_manager": "Become Manager",
+    "delete_account": "Delete Account"
+  },
+  "profile": {
+    "username": "Username",
+    "email": "Email",
+    "edit_profile": "Edit Profile",
+    "save_changes": "Save Changes",
+    "destination_manager": "Destination Manager"
+  },
+  "password": {
+    "current": "Current Password",
+    "new": "New Password",
+    "edit_password": "Edit Password",
+    "current_placeholder": "Enter your current password",
+    "min_length": "Password must be at least 8 characters",
+    "success_title": "Success!",
+    "success": "Password changed successfully",
+    "error": {
+      "title": "Error",
+      "general": "Failed to change password",
+      "validation": "Validation error",
+      "server": "Server error",
+      "connection": "Connection error"
+    }
+  },
+  "manager": {
+    "info": "To become a destination manager, please contact our support team."
+  },
+  "delete": {
+    "confirm": "Delete Account",
+    "confirm_title": "Delete Your Account?",
+    "confirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "success_title": "Account Deleted",
+    "success": "Your account has been deleted successfully.",
+    "error_title": "Error",
+    "error": "Failed to delete account",
+    "password_required": "Please enter your current password",
+    "unauthorized": "Unauthorized action",
+    "validation_error": "Validation error"
+  },
+  "alerts": {
+    "success_title": "Success!",
+    "profile_saved": "Profile updated successfully",
+    "error_title": "Error",
+    "invalid_email": "Please enter a valid email address",
+    "validation_failed": "Validation failed",
+    "save_failed": "Failed to save changes"
+  }
+}

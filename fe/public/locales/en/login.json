@@ -1,0 +1,22 @@
+{
+  "title": "Login",
+  "description": "Log in to access your account.",
+  "image_alt": "Login image",
+  "email_label": "Email",
+  "email_placeholder": "johndoe@gmail.com",
+  "password_label": "Password",
+  "password_placeholder": "password",
+  "submit": "Login",
+  "no_account": "Don't have an account?",
+  "register_here": "Register here",
+  "success": {
+    "title": "Login Successful!",
+    "message": "You have successfully logged in."
+  },
+  "error": {
+    "unauthorized_title": "Unauthorized",
+    "unauthorized_message": "Email or password is incorrect",
+    "general_title": "Error",
+    "general_message": "Something went wrong. Please try again."
+  }
+}
